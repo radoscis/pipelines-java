@@ -28,12 +28,4 @@ pool:
 jobs:
 - template: ../steps/java.maven.yml
   parameters: 
-    jdk_version: $(jdk_version)    
-- job: TestCoverage
-  steps:
-  - task: PublishCodeCoverageResults@1
-    inputs:
-      codeCoverageTool: "JaCoCo"
-      summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml"
-      reportDirectory: "$(System.DefaultWorkingDirectory)/**/site/jacoco"
-      failIfCoverageEmpty: true
+    jdk_version: $(jdk_version)

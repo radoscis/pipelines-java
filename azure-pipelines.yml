@@ -25,7 +25,9 @@ strategy:
 pool:
   vmImage: $(imageName)
 
-jobs:
+stages:
+- stage: Build
+  jobs:
   - job: "BuildJob"
     steps:
       - task: Maven@3

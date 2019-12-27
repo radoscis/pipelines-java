@@ -26,11 +26,9 @@ pool:
   vmImage: $(imageName)
 
 jobs:
-- job: BuildJar
-  steps:
-  - template: ../steps/java.maven.yml
-    parameters: 
-      jdk_version: $(jdk_version)    
+- template: ../steps/java.maven.yml
+  parameters: 
+    jdk_version: $(jdk_version)    
 - job: TestCoverage
   steps:
   - task: PublishCodeCoverageResults@1

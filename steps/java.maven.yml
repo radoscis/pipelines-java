@@ -3,6 +3,8 @@ parameters:
   type: string
   default: 1.8
 - name: job_name
+  type: string
+  default: 'testBuildJob'
 
 
 jobs:

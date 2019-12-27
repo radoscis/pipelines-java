@@ -26,13 +26,6 @@ pool:
   vmImage: $(imageName)
 
 steps:
-  - task: Maven@3
-    inputs:
-      mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: $(jdk_version)
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      goals: 'package'
+- template: steps/java.maven.yml
+  parameters:
+    jdk_version: $(jdk_version)    

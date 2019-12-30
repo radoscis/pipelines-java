@@ -11,8 +11,8 @@ resources:
   repositories:
   - repository: templatesRepo
     type: GitHub
-    connection: radoscis  
-    source: radoscis/pipelines-templates
+    endpoint: radoscis  
+    name: radoscis/pipelines-templates
 variables: 
   - template: pipelines-templates/variables/platforms_jdks.yml
 strategy:

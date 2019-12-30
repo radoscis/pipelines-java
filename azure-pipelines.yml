@@ -26,11 +26,11 @@ stages:
     strategy:
       matrix:
         linux_jdk_10:
-          imageName: $(linux_jdk_10_imageName)
-          jdk_version: $(linux_jdk_10_jdk_version)
+          imageName: ${{ variables.linux_jdk_10_imageName }}
+          jdk_version: ${{ variables.linux_jdk_10_jdk_version  }}
         linux_jdk_11:
-          imageName: $(linux_jdk_11_imageName)
-          jdk_version: $(linux_jdk_11_jdk_version)
+          imageName: ${{ variables.linux_jdk_11_imageName }}
+          jdk_version: ${{ variables.linux_jdk_11_jdk_version }}
       maxParallel: 1
     pool: 
       vmImage: $(imageName)

@@ -29,6 +29,7 @@ pool:
   vmImage: $(imageName)
 
 steps:
+- checkout: templatesRepo
 - template: pipelines-templates/steps/java.maven.yml
   parameters:
     jdk_version: $(jdk_version)    

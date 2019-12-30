@@ -6,26 +6,28 @@
 trigger:
 - none
 
+name: $(Date:yyyyMMdd)$(Rev:.r)
+resources:
+  - repository: templatesRepo
+    type: GitHub
+    connection: radoscis  
+    source: radoscis/pipelines-templates
+variables: 
+  - template: pipelines-templates/variables/platforms_jdks.yml
 strategy:
   matrix:
     linux_jdk_10:
-      imageName: "ubuntu-16.04"
-      jdk_version: "1.10"
+      imageName: ${{ variables.linux_jdk_10_imageName }}
+      jdk_version: ${{ variables.linux_jdk_10_jdk_version }}
     linux_jdk_11:
-      imageName: "ubuntu-16.04"
-      jdk_version: "1.11"
-    windows_jdk_10:
-      imageName: "vs2017-win2016"
-      jdk_version: "1.10"
-    windows_jdk_11:
-      imageName: "ubuntu-16.04"
-      jdk_version: "1.11"
-  maxParallel: 2
+      imageName: ${{ variables.linux_jdk_11_imageName }}
+      jdk_version: ${{ variables.linux_jdk_11_jdk_version }}
+  maxParallel: 1
 
 pool:
   vmImage: $(imageName)
 
 steps:
-- template: steps/java.maven.yml
+- template: pipelines-templates/steps/java.maven.yml
   parameters:
     jdk_version: $(jdk_version)    

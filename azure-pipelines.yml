@@ -8,6 +8,7 @@ trigger:
 
 name: $(Date:yyyyMMdd)$(Rev:.r)
 resources:
+  repositories:
   - repository: templatesRepo
     type: GitHub
     connection: radoscis  

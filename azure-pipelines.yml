@@ -13,41 +13,28 @@ resources:
     type: GitHub
     endpoint: radoscis  
     name: radoscis/pipelines-templates
-variables: 
-  - template: pipelines-templates/variables/platforms_jdks.yml
-strategy:
-  matrix:
-    linux_jdk_10:
-      imageName: $(linux_jdk_10_imageName)
-      jdk_version: $(linux_jdk_10_jdk_version)
-    linux_jdk_11:
-      imageName: $(linux_jdk_11_imageName)
-      jdk_version: $(linux_jdk_11_jdk_version)
-  maxParallel: 1
 
-pool:
-  vmImage: $(imageName)
-
-jobs:
-- job: checkOutTemplateRepos
-  steps:
-  - checkout: templatesRepo
-- job: buildWithMaven
-  variables: 
-  - template: pipelines-templates/variables/platforms_jdks.yml
-  strategy:
-    matrix:
-      linux_jdk_10:
-        imageName: $(linux_jdk_10_imageName)
-        jdk_version: $(linux_jdk_10_jdk_version)
-      linux_jdk_11:
-        imageName: $(linux_jdk_11_imageName)
-        jdk_version: $(linux_jdk_11_jdk_version)
-    maxParallel: 1
-  pool: 
-    vmImage: $(imageName)
-  steps:
-  - template: pipelines-templates/steps/java.maven.yml
-    parameters:
-      jdk_version: $(jdk_version)
-
+stages:
+- stage: build
+  jobs:
+  - job: checkOutTemplateRepos
+    steps:
+    - checkout: templatesRepo
+  - job: buildWithMaven
+    variables: 
+    - template: pipelines-templates/variables/platforms_jdks.yml
+    strategy:
+      matrix:
+        linux_jdk_10:
+          imageName: $(linux_jdk_10_imageName)
+          jdk_version: $(linux_jdk_10_jdk_version)
+        linux_jdk_11:
+          imageName: $(linux_jdk_11_imageName)
+          jdk_version: $(linux_jdk_11_jdk_version)
+      maxParallel: 1
+    pool: 
+      vmImage: $(imageName)
+    steps:
+    - template: pipelines-templates/steps/java.maven.yml
+      parameters:
+        jdk_version: $(jdk_version)

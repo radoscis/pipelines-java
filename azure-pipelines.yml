@@ -22,7 +22,7 @@ stages:
     - checkout: templatesRepo
   - job: buildWithMaven
     variables: 
-    - template: pipelines-templates/variables/platforms_jdks.yml
+    - template: /vars/platforms_jdks.yml
     strategy:
       matrix:
         linux_jdk_10:
